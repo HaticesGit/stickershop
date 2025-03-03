@@ -1,16 +1,18 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Image, Button } from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
-const ProductCard = () => {
+const ProductCard = ({ title, subtitle, price, image, onPress}) => {
+    const navigation = useNavigation();
     return (
         <View style={styles.card}>
-            <Image 
-                source={require("../images/bunnyHop.png")}
-                style={styles.image}
-            />
-            <Text style={styles.title}>Bunny Hop</Text>
-            <Text style={styles.description}>A cute hopping bunny</Text>
-            <Button title="Buy" color="#FC55BE"/>
+            <Image source={image} style={styles.image}/>
+            <Text style={styles.title}>{title}</Text>
+            <Text style={styles.description}>{subtitle}</Text>
+            <Text style={styles.price}>${price}</Text>
+            <TouchableOpacity style={styles.button} onPress={onPress}>
+                <Text style={styles.buttonText}>View Product</Text>
+            </TouchableOpacity>
         </View>
     );
 };
@@ -37,6 +39,13 @@ const styles = StyleSheet.create({
         fontSize: 14,
         color: '#555',
         marginTop: 4,
+    },
+    button: {
+        backgroundColor: '#FC55BE',
+        padding: 8,
+        borderRadius: 4,
+        marginTop: 8,
+        alignItems: 'center',
     },
 });
 

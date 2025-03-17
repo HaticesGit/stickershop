@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState} from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Image, ScrollView, TouchableOpacity } from 'react-native';
 import ProductCard from '../components/productCard.js';
@@ -8,6 +8,31 @@ import jett from "../images/jett.webp"
 import bunnyHop from "../images/bunnyHop.png"
 
 const HomeScreen = ({ navigation }) => {
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    fetch('https://api.webflow.com/v2/sites/67b37ffe11b0a9ee2a8fb54f/products', {
+      headers: {
+        Authorization:
+          'Bearer fd36ac8098bf610c135f3a51ba5645043d5183f55118a3fa8d649575ed5081ef',
+      },
+      }
+    )
+    .then((res) => res.json())
+      .then((data) => 
+        setProducts(
+          data.items.map((item) => ({
+            id: item.product.id,
+            title: product.item.product.fieldData.name,
+            subtitle: product.item.product.fieldData.description,
+            price: ( item.skus[0]?.fieldData.price.value || 0) / 100,
+            image: {uri: item.skus[0]?.fieldData["main-image"]?.url },
+          }))
+        )
+      )
+      .catch((err) => console.error('error:', err));
+}, []);
+   
     return (
       <View style={styles.container}>
         <Text style={styles.heading}>Welcome to Hati's Sticker Shop!</Text>
@@ -16,49 +41,17 @@ const HomeScreen = ({ navigation }) => {
         <ScrollView contentContainerStyle={styles.scrollViewContent}>
           <View style={styles.row}>
             <Text style={styles.heading2}>Our stickers</Text>
+            {products.map((product) => (
             <ProductCard
-              title="Ain't My Time"
-              subtitle="Brimstone is just a chill dude after all"
-              price="3"
-              image={aintMyTime}
+              key={product.id}
+              title={product.title}
+              subtitle={product.subtitle}
+              price={product.price.toString()}
+              image={product.image}
               onPress={() =>
-                navigation.navigate('Details', {
-                  title: "Ain't My Time",
-                  subtitle: "Brimstone is just a chill dude after all",
-                  price: "3",
-                  image: aintMyTime,
-                })
-              }
+                navigation.navigate('Details',product)}
             />
-            <ProductCard
-              title="Embarassing!"
-              subtitle="That shot was embarassing! Let's not talk about it, shall we..."
-              price="3"
-              image={jett}
-              onPress={() =>
-                navigation.navigate('Details', {
-                  title: "Embarassing!",
-                  subtitle: "That shot was embarassing! Let's not talk about it, shall we...",
-                  price: "3",
-                  image: jett,
-                })
-              }
-            />
-
-            <ProductCard
-              title="Bunny hop"
-              subtitle="A cute little  hopping bunny, now turned into a sticker!"
-              price="3"
-              image={bunnyHop}
-              onPress={() =>
-                navigation.navigate('Details', {
-                  title: "Bunny hop",
-                  subtitle: "A cute little  hopping bunny, now turned into a sticker!",
-                  price: "3",
-                  image: bunnyHop,
-                })
-              }
-            />
+          ))}
             <StatusBar style="auto" />
           </View>
         </ScrollView>

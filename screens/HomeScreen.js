@@ -23,8 +23,8 @@ const HomeScreen = ({ navigation }) => {
         setProducts(
           data.items.map((item) => ({
             id: item.product.id,
-            title: product.item.product.fieldData.name,
-            subtitle: product.item.product.fieldData.description,
+            title: item.product.fieldData.name,
+            subtitle: item.product.fieldData.description,
             price: ( item.skus[0]?.fieldData.price.value || 0) / 100,
             image: {uri: item.skus[0]?.fieldData["main-image"]?.url },
           }))

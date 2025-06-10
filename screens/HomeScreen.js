@@ -65,7 +65,7 @@ useEffect(() => {
             id: item.id,
             title: item.fieldData.name,
             subtitle: item.fieldData.intro,
-            image: { uri: item.fieldData["Thumbnail Image"]?.url },
+            image: { uri: item.fieldData["thumbnail-image"]?.url },
             text: item.fieldData.text,
           }))
         );

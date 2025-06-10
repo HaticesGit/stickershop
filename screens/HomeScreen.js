@@ -149,9 +149,17 @@ const sortedProducts = [...filteredProducts].sort((a, b) => {
                 onPress={() =>
                 navigation.navigate('BlogDetail', { blog })
                 }
-            />
-            ))}
-          </View>
+              />
+              ))}
+            </View>
+            
+            <View style={styles.cardContainer}>
+              <TouchableOpacity style={styles.button}
+                onPress={() => navigation.navigate('Contact')}
+              >
+                <Text style={styles.heading2}>Contact us!</Text>
+              </TouchableOpacity>
+            </View>  
           <StatusBar style="auto" />
         </ScrollView>
         </View>
@@ -200,6 +208,15 @@ const sortedProducts = [...filteredProducts].sort((a, b) => {
         justifyContent: 'space-between',
         flexWrap: 'wrap',
       },
+      button: {
+        backgroundColor: '#FC55BE',
+        padding: 8,
+        paddingBottom: -4,
+        borderRadius: 4,
+        marginTop: 8,
+        marginBottom: 16,
+        alignItems: 'center',
+    },
     });
     
     export default HomeScreen;

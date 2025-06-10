@@ -146,7 +146,10 @@ const sortedProducts = [...filteredProducts].sort((a, b) => {
                 title={blog.title}
                 intro={blog.subtitle}
                 image={blog.image}
-              />
+                onPress={() =>
+                navigation.navigate('BlogDetail', { blog })
+                }
+            />
             ))}
           </View>
           <StatusBar style="auto" />

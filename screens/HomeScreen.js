@@ -22,6 +22,7 @@ const HomeScreen = ({ navigation }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [sortOption , setSortOption] = useState("price-asc");
   const [blogs, setBlogs] = useState([]);
+  const [wishlist, setWishlist] = useState([]);
 
   useEffect(() => {
     fetch('https://api.webflow.com/v2/sites/67b37ffe11b0a9ee2a8fb54f/products', {
@@ -85,6 +86,14 @@ const sortedProducts = [...filteredProducts].sort((a, b) => {
   if (sortOption === "name-asc") return a.title.localeCompare(b.title);
   if (sortOption === "name-desc") return b.title.localeCompare(a.title);
   });
+
+const toggleWishlist = (productId) => {
+  setWishlist((prev) =>
+    prev.includes(productId)
+      ? prev.filter((id) => id !== productId)
+      : [...prev, productId]
+  );
+};
    
     return (
       <View style={styles.container}>
@@ -131,6 +140,10 @@ const sortedProducts = [...filteredProducts].sort((a, b) => {
               <ProductCard
               key={product.id}
               {...product}
+
+              isInWishlist={wishlist.includes(product.id)}
+              onToggleWishlist={() => toggleWishlist(product.id)}
+
               onPress={() =>
                 navigation.navigate('Details',product)}
             />
@@ -161,7 +174,7 @@ const sortedProducts = [...filteredProducts].sort((a, b) => {
               </TouchableOpacity>
 
               <TouchableOpacity style={styles.button}
-                onPress={() => navigation.navigate('Profile')}
+                onPress={() => navigation.navigate('Profile' , { wishlist: wishlist, products: products })}
               >
                 <Text style={styles.heading2}>Profile</Text>
               </TouchableOpacity>

@@ -1,11 +1,20 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { Ionicons } from '@expo/vector-icons';
 
-const ProductCard = ({ title, subtitle, price, image, onPress}) => {
+const ProductCard = ({ title, subtitle, price, image, onPress, isInWishlist, onToggleWishlist}) => {
     const navigation = useNavigation();
     return (
         <View style={styles.card}>
+            <TouchableOpacity onPress={onToggleWishlist} style={styles.wishlist}>
+                <Ionicons
+                    name={isInWishlist ? 'heart' : 'heart-outline'}
+                    size={24}
+                    color={isInWishlist ? 'red' : 'gray'}
+                />
+            </TouchableOpacity>
+
             <Image source={image} style={styles.image}/>
             <Text style={styles.title}>{title}</Text>
             <Text style={styles.description}>{subtitle}</Text>
@@ -46,6 +55,12 @@ const styles = StyleSheet.create({
         borderRadius: 4,
         marginTop: 8,
         alignItems: 'center',
+    },
+    wishlist: {
+        position: 'absolute',
+        top: 10,
+        right: 10,
+        zIndex: 1,
     },
 });
 

@@ -1,16 +1,13 @@
 import { StyleSheet, Text, View, Image, ScrollView, TouchableOpacity, image } from 'react-native';
 
-const ProfileScreen = ({ route }) => {
+const Wishlist = ({ route }) => {
   const { products = [], wishlist = [] } = route.params || {};
 
 const favoriteProducts = products.filter((p) => wishlist.includes(p.id));
 
   return (
     <ScrollView style={styles.container}>
-      <Text style={styles.heading}>Hatice</Text>
-      <Text style={styles.subheading}>I love stickers</Text>
-
-      <Text style={styles.sectionTitle}>My Favorite Stickers:</Text>
+      <Text style={styles.heading2}>My Favorite Stickers</Text>
       {favoriteProducts.length === 0 ? (
         <Text style={styles.noFavorites}>No favorites yet!</Text>
       ) : (
@@ -40,8 +37,8 @@ const styles = StyleSheet.create({
     color: '#666',
     marginBottom: 16,
   },
-  sectionTitle: {
-    fontSize: 22,
+  heading2: {
+    fontSize: 20,
     fontWeight: '600',
     marginVertical: 12,
   },
@@ -71,4 +68,4 @@ const styles = StyleSheet.create({
   },
 });
 
- export default ProfileScreen;
+ export default Wishlist;

@@ -174,9 +174,9 @@ const toggleWishlist = (productId) => {
               </TouchableOpacity>
 
               <TouchableOpacity style={styles.button}
-                onPress={() => navigation.navigate('Profile' , { wishlist: wishlist, products: products })}
+                onPress={() => navigation.navigate('Wishlist' , { wishlist: wishlist, products: products })}
               >
-                <Text style={styles.heading2}>Profile</Text>
+                <Text style={styles.heading2}>Wishlist</Text>
               </TouchableOpacity>
             </View>  
           <StatusBar style="auto" />

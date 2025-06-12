@@ -159,6 +159,12 @@ const sortedProducts = [...filteredProducts].sort((a, b) => {
               >
                 <Text style={styles.heading2}>Contact us!</Text>
               </TouchableOpacity>
+
+              <TouchableOpacity style={styles.button}
+                onPress={() => navigation.navigate('Profile')}
+              >
+                <Text style={styles.heading2}>Profile</Text>
+              </TouchableOpacity>
             </View>  
           <StatusBar style="auto" />
         </ScrollView>

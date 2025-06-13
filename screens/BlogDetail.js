@@ -6,29 +6,28 @@ const BlogDetail = ({ route }) => {
     const { title, intro, text, image } = blog;
 
   return (
-    <View style={styles.container}>
+    <ScrollView contentContainerStyle={styles.container}>
       <Text style={styles.title}>{title}</Text>
       <Text style={styles.intro}>{intro}</Text>
       <Image style={styles.image} source={image}/>
       <Text style={styles.text}>{text}</Text>
-    </View>
+    </ScrollView>
   );
 }
 
     const styles = StyleSheet.create({
       container: {
-        flex: 1,
         backgroundColor: '#fff',
         alignItems: 'center',
-        justifyContent: 'center',
+        paddingHorizontal: 20,
       },
       title: {
         fontSize: 24,
         fontWeight: 'bold',
         marginBottom: 10,
       },
-      subtitle: {
-        fontSize: 18,
+      heading2: {
+        fontSize: 20,
         marginBottom: 8,
         width: 300,
       },
@@ -38,7 +37,6 @@ const BlogDetail = ({ route }) => {
       },
       quantityContainer: {
         flexDirection: 'row',
-        alignItems: 'center',
         marginVertical: 16,
       },
       button: {
@@ -49,9 +47,14 @@ const BlogDetail = ({ route }) => {
         margin: 4,
       },
       image: {
-        width: 300,
-        height: 300,
+        width: 150,
+        height: 150,
         borderRadius: 8,
+      },
+      text: {
+        fontSize: 16,
+        marginTop: 20,
+        textAlign: 'justify',
       },
     });
  export default BlogDetail;

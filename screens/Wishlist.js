@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     marginVertical: 12,
   },
   noFavorites: {
-    fontStyle: 'italic',
+    fontSize: 16,
     color: '#aaa',
   },
   card: {

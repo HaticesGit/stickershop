@@ -167,11 +167,7 @@ const toggleWishlist = (productId) => {
             </View>
             
             <View style={styles.cardContainer}>
-              <TouchableOpacity style={styles.button}
-                onPress={() => navigation.navigate('Contact')}
-              >
-                <Text style={styles.heading2}>Contact us!</Text>
-              </TouchableOpacity>
+              
 
               <TouchableOpacity style={styles.button}
                 onPress={() => navigation.navigate('Wishlist' , { wishlist: wishlist, products: products })}

@@ -77,6 +77,10 @@ const ProductDetail = ({ route }) => {
         height: 300,
         borderRadius: 8,
       },
+      quantityText: {
+        fontSize: 18,
+        marginHorizontal: 50,
+      },
     });
     
     export default ProductDetail;

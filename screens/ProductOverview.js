@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, ScrollView, TextInput } from 'react-native';
-import { Picker } from '@react-native-picker/picker';
+import { StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import SearchFilterCard from '../components/searchFilterCard';
 import ProductCard from '../components/productCard';
 
 const categoryNames = {
@@ -61,33 +61,15 @@ const ProductOverview = ({ navigation }) => {
     <ScrollView style={styles.container}>
       <Text style={styles.heading}>All Stickers</Text>
 
-      <TextInput
-        style={styles.searchInput}
-        placeholder="Search..."
-        placeholderTextColor="#999"
-        value={searchQuery}
-        onChangeText={setSearchQuery}
+      <SearchFilterCard
+        searchQuery={searchQuery}
+        onSearchChange={setSearchQuery}
+        selectedCategory={selectedCategory}
+        onCategoryChange={setSelectedCategory}
+        sortOption={sortOption}
+        onSortChange={setSortOption}
+        categories={[...new Set(products.map((p) => p.category))]}
       />
-
-      <View style={styles.pickerContainer}>
-        <Picker 
-        selectedValue={selectedCategory} 
-        onValueChange={setSelectedCategory}>
-          <Picker.Item label="All categories" value="" />
-          {[...new Set(products.map((p) => p.category))].map((category) => (
-            <Picker.Item key={category} label={category} value={category} />
-          ))}
-        </Picker>
-      </View>
-
-      <View style={styles.pickerContainer}>
-        <Picker selectedValue={sortOption} onValueChange={setSortOption}>
-          <Picker.Item label="Price (low to high)" value="price-asc" />
-          <Picker.Item label="Price (high to low)" value="price-desc" />
-          <Picker.Item label="Name (A-Z)" value="name-asc" />
-          <Picker.Item label="Name (Z-A)" value="name-desc" />
-        </Picker>
-      </View>
 
       <View style={styles.productGrid}>
         {sortedProducts.map((product) => (
@@ -100,6 +82,19 @@ const ProductOverview = ({ navigation }) => {
           />
         ))}
       </View>
+      <View style={styles.cardContainer}>
+                <TouchableOpacity
+                  style={styles.button}
+                  onPress={() =>
+                    navigation.navigate('Wishlist', {
+                      wishlist: wishlist,
+                      products: products,
+                    })
+                  }
+                >
+                  <Text style={styles.heading2}>Wishlist</Text>
+                </TouchableOpacity>
+              </View>
     </ScrollView>
   );
 };
@@ -109,38 +104,28 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     padding: 16,
   },
+  cardContainer: {
+    width: '100%',
+    paddingHorizontal: 24,
+  },
   heading: {
     fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 12,
     textAlign: 'center',
   },
-    pickerContainer: {
-    backgroundColor: '#fffefc', // off-white
-    borderRadius: 8,
-    marginBottom: 16,
-    padding: 4,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.05,
-    shadowRadius: 4,
-    elevation: 2,
-  },
-   searchInput: {
-    backgroundColor: '#fffefc',
-    borderRadius: 8,
-    padding: 10,
-    marginBottom: 12,
-    color: '#000',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.05,
-    shadowRadius: 4,
-    elevation: 2,
-  },
   productGrid: {
     flexDirection: 'column',
     gap: 12,
+  },
+  button: {
+    fontFamily: 'Poppins_600SemiBold',
+    backgroundColor: '#FC55BE',
+    padding: 8,
+    borderRadius: 4,
+    marginTop: 8,
+    marginBottom: 16,
+    alignItems: 'center',
   },
 });
 

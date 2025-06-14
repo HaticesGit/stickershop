@@ -124,19 +124,7 @@ const HomeScreen = ({ navigation }) => {
         onSortChange={setSortOption}
         categories={[...new Set(products.map((p) => p.category))]}
       />
-<View style={styles.cardContainer}>
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() =>
-              navigation.navigate('Wishlist', {
-                wishlist: wishlist,
-                products: products,
-              })
-            }
-          >
-            <Text>Wishlist</Text>
-          </TouchableOpacity>
-        </View>
+
       <ScrollView contentContainerStyle={styles.scrollViewContent}>
         <Text style={styles.heading2}>Our stickers</Text>
 
@@ -169,7 +157,19 @@ const HomeScreen = ({ navigation }) => {
             ))}
         </View>
 
-        
+        <View style={styles.cardContainer}>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() =>
+              navigation.navigate('Wishlist', {
+                wishlist: wishlist,
+                products: products,
+              })
+            }
+          >
+            <Text>Wishlist</Text>
+          </TouchableOpacity>
+        </View>
         <StatusBar style="auto" />
       </ScrollView>
     </View>

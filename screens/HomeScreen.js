@@ -1,13 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import {
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  ScrollView,
-  TouchableOpacity,
-} from 'react-native';
+import {StyleSheet, Text, View, Image, TouchableOpacity, ScrollView, } from 'react-native';
 import ProductCard from '../components/productCard.js';
 import BlogCard from '../components/blogCard.js';
 import SearchFilterCard from '../components/searchFilterCard.js';
@@ -38,25 +31,25 @@ const HomeScreen = ({ navigation }) => {
         },
       }
     )
-      .then((res) => res.json())
-      .then((data) => {
-        setProducts(
-          data.items.map((item) => ({
-            id: item.product.id,
-            title: item.product.fieldData.name,
-            subtitle: item.product.fieldData.description,
-            price:
-              (item.skus[0]?.fieldData.price.value || 0) / 100,
-            image: {
-              uri: item.skus[0]?.fieldData['main-image']?.url,
-            },
-            category:
-              categoryNames[item.product.fieldData.category[0]] ||
-              'Unknown',
-          }))
-        );
-      })
-      .catch(console.error);
+    .then((res) => res.json())
+    .then((data) => {
+      setProducts(
+        data.items.map((item) => ({
+          id: item.product.id,
+          title: item.product.fieldData.name,
+          subtitle: item.product.fieldData.description,
+          price:
+            (item.skus[0]?.fieldData.price.value || 0) / 100,
+          image: {
+            uri: item.skus[0]?.fieldData['main-image']?.url,
+          },
+          category:
+            categoryNames[item.product.fieldData.category[0]] ||
+            'Unknown',
+        }))
+      );
+    })
+    .catch(console.error);
   }, []);
 
   useEffect(() => {
@@ -69,21 +62,21 @@ const HomeScreen = ({ navigation }) => {
         },
       }
     )
-      .then((res) => res.json())
-      .then((data) => {
-        setBlogs(
-          data.items.map((item) => ({
-            id: item.id,
-            title: item.fieldData.name,
-            subtitle: item.fieldData.intro,
-            image: {
-              uri: item.fieldData['thumbnail-image']?.url,
-            },
-            text: item.fieldData.text,
-          }))
-        );
-      })
-      .catch(console.error);
+    .then((res) => res.json())
+    .then((data) => {
+      setBlogs(
+        data.items.map((item) => ({
+          id: item.id,
+          title: item.fieldData.name,
+          subtitle: item.fieldData.intro,
+          image: {
+            uri: item.fieldData['thumbnail-image']?.url,
+          },
+          text: item.fieldData.text,
+        }))
+      );
+    })
+    .catch(console.error);
   }, []);
 
   const filteredProducts = products.filter(
@@ -135,7 +128,7 @@ const HomeScreen = ({ navigation }) => {
       <ScrollView contentContainerStyle={styles.scrollViewContent}>
         <Text style={styles.heading2}>Our stickers</Text>
 
-        <View style={styles.row}>
+        <View style={styles.column}>
           {sortedProducts.map((product) => (
             <ProductCard
               key={product.id}
@@ -149,7 +142,7 @@ const HomeScreen = ({ navigation }) => {
         </View>
 
         <Text style={styles.heading2}>Our Blogs</Text>
-        <View style={styles.row}>
+        <View style={styles.column}>
           {blogs &&
             blogs.map((blog) => (
               <BlogCard
@@ -233,7 +226,7 @@ const styles = StyleSheet.create({
     width: '100%',
     paddingHorizontal: 24,
   },
-  row: {
+  column: {
     flexDirection: 'column',
     justifyContent: 'space-between',
     flexWrap: 'wrap',

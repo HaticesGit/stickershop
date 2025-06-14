@@ -13,19 +13,19 @@ const BlogOverview = ({ navigation }) => {
           'Bearer fd36ac8098bf610c135f3a51ba5645043d5183f55118a3fa8d649575ed5081ef',
       },
     })
-      .then((res) => res.json())
-      .then((data) => {
-        setBlogs(
-          data.items.map((item) => ({
-            id: item.id,
-            title: item.fieldData.name,
-            subtitle: item.fieldData.intro,
-            image: { uri: item.fieldData["thumbnail-image"]?.url },
-            text: item.fieldData.text,
-          }))
-        );
-      })
-      .catch(console.error);
+    .then((res) => res.json())
+    .then((data) => {
+      setBlogs(
+        data.items.map((item) => ({
+          id: item.id,
+          title: item.fieldData.name,
+          subtitle: item.fieldData.intro,
+          image: { uri: item.fieldData["thumbnail-image"]?.url },
+          text: item.fieldData.text,
+        }))
+      );
+    })
+    .catch(console.error);
   }, []);
 
   return (

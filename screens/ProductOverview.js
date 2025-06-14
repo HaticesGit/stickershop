@@ -22,20 +22,20 @@ const ProductOverview = ({ navigation }) => {
         Authorization: 'Bearer fd36ac8098bf610c135f3a51ba5645043d5183f55118a3fa8d649575ed5081ef',
       },
     })
-      .then((res) => res.json())
-      .then((data) => {
-        setProducts(
-          data.items.map((item) => ({
-            id: item.product.id,
-            title: item.product.fieldData.name,
-            subtitle: item.product.fieldData.description,
-            price: (item.skus[0]?.fieldData.price.value || 0) / 100,
-            image: { uri: item.skus[0]?.fieldData['main-image']?.url },
-            category: categoryNames[item.product.fieldData.category[0]] || 'Unknown',
-          }))
-        );
-      })
-      .catch(console.error);
+    .then((res) => res.json())
+    .then((data) => {
+      setProducts(
+        data.items.map((item) => ({
+          id: item.product.id,
+          title: item.product.fieldData.name,
+          subtitle: item.product.fieldData.description,
+          price: (item.skus[0]?.fieldData.price.value || 0) / 100,
+          image: { uri: item.skus[0]?.fieldData['main-image']?.url },
+          category: categoryNames[item.product.fieldData.category[0]] || 'Unknown',
+        }))
+      );
+    })
+    .catch(console.error);
   }, []);
 
   const filteredProducts = products.filter(
@@ -83,18 +83,18 @@ const ProductOverview = ({ navigation }) => {
         ))}
       </View>
       <View style={styles.cardContainer}>
-                <TouchableOpacity
-                  style={styles.button}
-                  onPress={() =>
-                    navigation.navigate('Wishlist', {
-                      wishlist: wishlist,
-                      products: products,
-                    })
-                  }
-                >
-                  <Text style={styles.heading2}>Wishlist</Text>
-                </TouchableOpacity>
-              </View>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() =>
+            navigation.navigate('Wishlist', {
+              wishlist: wishlist,
+              products: products,
+            })
+          }
+        >
+          <Text style={styles.heading2}>Wishlist</Text>
+        </TouchableOpacity>
+      </View>
     </ScrollView>
   );
 };

@@ -1,14 +1,12 @@
 import React, { useState} from 'react';
-import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Image, ScrollView, TouchableOpacity, image } from 'react-native';
 
 const ProductDetail = ({ route }) => {
   const {title, subtitle, price, image} = route.params;
   const [quantity, setQuantity] =useState(1); 
-
   const [wishlist, setWishlist] = useState([]);
-
   const increaseQuantity = () => setQuantity(quantity + 1);
+  
   const decreaseQuantity = () => {
     if (quantity > 1) {
       setQuantity(quantity - 1);

@@ -11,6 +11,7 @@ import ContactScreen from './screens/ContactScreen.js';
 import Wishlist from './screens/Wishlist.js';
 import ProductOverview from './screens/ProductOverview.js';
 import BlogOverview from './screens/BlogOverview.js';
+import ProfilePafe from './screens/ProfilePage.js';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -28,6 +29,7 @@ function MyTabs() {
           else if (route.name === 'Contact') iconName = 'call-outline';
           else if (route.name === 'Stickers') iconName = 'happy-outline';
           else if (route.name === 'Blogs') iconName = 'book-outline';
+          else if (route.name === 'Profile') iconName = 'person-outline';
           return <Ionicons name={iconName} size={size} color={color} />;
         },
       })}
@@ -36,6 +38,7 @@ function MyTabs() {
       <Tab.Screen name="Contact" component={ContactScreen} />
       <Tab.Screen name="Stickers" component={ProductOverview} />
       <Tab.Screen name="Blogs" component={BlogOverview} />
+      <Tab.Screen name="Profile" component={ProfilePafe} />
     </Tab.Navigator>
   );
 }
